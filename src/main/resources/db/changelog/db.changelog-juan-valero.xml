@@ -1,0 +1,54 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+	<changeSet author="juan valero"
+		id="addUniqueConstraint-panel">
+		<addUniqueConstraint columnNames="serial"
+			constraintName="unique_serial_panel" schemaName="crosssolar"
+			tableName="panel" />
+	</changeSet>
+	<changeSet author="juan valero"
+		id="modifyDataTypeFromHourly_Electricity">
+		<modifyDataType columnName="latitude"
+			newDataType="DECIMAL(9,6)" schemaName="crosssolar" tableName="panel" />
+		<modifyDataType columnName="longitude"
+			newDataType="DECIMAL(9,6)" schemaName="crosssolar" tableName="panel" />
+	</changeSet>
+	<changeSet author="java" id="1001122014">
+		<insert tableName="hourly_electricity">
+			<column name="panel_id">1</column>
+			<column name="generated_electricity">50</column>
+			<column name="reading_at">2018-03-31 00:00:00</column>
+		</insert>
+	</changeSet>
+	<changeSet author="java" id="1001122015">
+		<insert tableName="hourly_electricity">
+			<column name="panel_id">1</column>
+			<column name="generated_electricity">100</column>
+			<column name="reading_at">2018-03-31 00:00:00</column>
+		</insert>
+	</changeSet>
+	<changeSet author="java" id="1001122016">
+		<insert tableName="hourly_electricity">
+			<column name="panel_id">1</column>
+			<column name="generated_electricity">110</column>
+			<column name="reading_at">2018-03-31 00:00:00</column>
+		</insert>
+	</changeSet>
+	<changeSet author="java" id="1001122017">
+		<insert tableName="hourly_electricity">
+			<column name="panel_id">1</column>
+			<column name="generated_electricity">50</column>
+			<column name="reading_at">2018-03-25 00:00:00</column>
+		</insert>
+	</changeSet>
+	<changeSet author="java" id="1001122018">
+		<insert tableName="hourly_electricity">
+			<column name="panel_id">1</column>
+			<column name="generated_electricity">110</column>
+			<column name="reading_at">2018-03-25 00:00:00</column>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

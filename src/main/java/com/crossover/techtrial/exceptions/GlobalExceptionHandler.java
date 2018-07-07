@@ -1,6 +1,9 @@
 package com.crossover.techtrial.exceptions;
 
 import java.util.AbstractMap;
+
+import javax.validation.ConstraintViolationException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -21,9 +24,10 @@ public class GlobalExceptionHandler {
   @ExceptionHandler
   public ResponseEntity<AbstractMap.SimpleEntry<String, String>> handle(Exception exception) {
     // general exception
-    LOG.error("Exception: Unable to process this request. ", exception);
+    LOG.error("Exception: Unable to process this request.", exception);
     AbstractMap.SimpleEntry<String, String> response =
         new AbstractMap.SimpleEntry<>("message", "Unable to process this request.");
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
   }
+  
 }
