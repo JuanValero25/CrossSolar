@@ -2,8 +2,6 @@ package com.crossover.techtrial.exceptions;
 
 import java.util.AbstractMap;
 
-import javax.validation.ConstraintViolationException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

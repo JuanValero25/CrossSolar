@@ -25,7 +25,14 @@ public interface HourlyElectricityRepository extends PagingAndSortingRepository<
 
 	Page<HourlyElectricity> findAllByPanelIdOrderByReadingAtDesc(Long panelId, Pageable pageable);
 
-	@Query(name="HourlyElectricity.findAllDataFromSerialPanelByDay", nativeQuery=true)
+	//@Query(name="HourlyElectricity.findAllDataFromSerialPanelByDay", nativeQuery=true)
+	@Query(value="select sum(generated_electricity) as 'sum',\n" + 
+			"		  min(generated_electricity) as 'min', \n" + 
+			"		  max(generated_electricity) as 'max',\n" + 
+			"		  avg(generated_electricity) as 'average', \n" + 
+			"		  reading_at as 'date' \n" + 
+			"		  from crosssolar.hourly_electricity inner join crosssolar.panel\n" + 
+			"		  where hourly_electricity.panel_id=panel.id and panel.serial=:panelSerial and reading_at<:currentDate group by DAY(reading_at) , MONTH(reading_at), YEAR(reading_at)", nativeQuery=true)
 	List<DailyElectricity> getElectrycityByDay(@Param("panelSerial")Long panelSerial, @Param("currentDate")LocalDate currentDate);
 
 }

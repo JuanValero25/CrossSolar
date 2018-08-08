@@ -1,23 +1,17 @@
 package com.crossover.techtrial.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
-import javax.persistence.ColumnResult;
-import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedNativeQuery;
-import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 
-import com.crossover.techtrial.dto.DailyElectricity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -27,19 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @author Crossover
  *
  */
-@NamedNativeQuery(name = "HourlyElectricity.findAllDataFromSerialPanelByDay", query = "select sum(generated_electricity) as 'sum',"
-		+ " min(generated_electricity) as 'min'," 
-		+ " max(generated_electricity) as 'max',"
-		+ " avg(generated_electricity) as 'average'," 
-		+ " reading_at as 'date' "
-		+ " from crosssolar.hourly_electricity inner join crosssolar.panel  where hourly_electricity.panel_id=panel.id and panel.serial=:panelSerial and reading_at<:currentDate group by DAY(reading_at) , MONTH(reading_at), YEAR(reading_at)", resultSetMapping = "avgDataSumaryMapping")
 
-@SqlResultSetMapping(name = "avgDataSumaryMapping", classes = @ConstructorResult(targetClass = DailyElectricity.class, columns = {
-		@ColumnResult(name = "sum", type = Long.class),
-		@ColumnResult(name = "min", type = Long.class),
-		@ColumnResult(name = "max", type = Long.class),
-		@ColumnResult(name = "average", type = Double.class),
-		@ColumnResult(name = "date", type = LocalDate.class) }))
 
 @Entity
 @Table(name = "hourly_electricity")
